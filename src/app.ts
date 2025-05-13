@@ -14,6 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+console.log('🚀 ~ SESSION_SECRET:', SESSION_SECRET);
 
 // Session configuration
 app.use(
