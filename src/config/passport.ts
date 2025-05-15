@@ -102,9 +102,7 @@ export const configurePassport = () => {
       {
         clientID: GOOGLE_CLIENT_ID as string,
         clientSecret: GOOGLE_CLIENT_SECRET as string,
-        callbackURL: process.env.VERCEL_URL
-          ? `https://${process.env.VERCEL_URL}/api/auth/google/callback`
-          : 'http://localhost:3000/api/auth/google/callback',
+        callbackURL: '/api/auth/google/callback',
         scope: ['profile', 'email'],
       },
       async (accessToken, refreshToken, profile, done) => {
