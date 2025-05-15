@@ -1,4 +1,5 @@
 import type { Request, Response } from 'express';
+
 import { User, type IUser } from '../models/user.model';
 
 import { Admin, IAdmin } from '../models/admin.model';
