@@ -20,12 +20,12 @@ const signup = async (req, res) => {
         const validation = (0, validations_1.validateInput)(validations_1.signupSchema, req.body);
         if (!validation.success) {
             const errors = validation.error.errors.map((err) => ({
-                field: err.path.join("."),
+                field: err.path.join('.'),
                 message: err.message,
             }));
             res.status(400).json({
                 success: false,
-                message: "Validation failed",
+                message: 'Validation failed',
                 errors,
             });
             return;
@@ -36,7 +36,7 @@ const signup = async (req, res) => {
         if (emailExists) {
             res.status(400).json({
                 success: false,
-                message: "Email already in use",
+                message: 'Email already in use',
             });
             return;
         }
@@ -44,19 +44,19 @@ const signup = async (req, res) => {
         const user = await user_model_1.User.create({
             email,
             password,
-            firstName: firstName || "",
-            lastName: lastName || "",
-            profilePhoto: "",
+            firstName: firstName || '',
+            lastName: lastName || '',
+            profilePhoto: '',
         });
         res.status(201).json({
-            message: "User created successfully",
+            message: 'User created successfully',
         });
     }
     catch (error) {
-        console.error("Signup error:", error);
+        console.error('Signup error:', error);
         res.status(500).json({
             success: false,
-            message: "An error occurred during signup",
+            message: 'An error occurred during signup',
         });
     }
 };
@@ -70,46 +70,46 @@ const login = (req, res, next) => {
         const validation = (0, validations_1.validateInput)(validations_1.loginSchema, req.body);
         if (!validation.success) {
             const errors = validation.error.errors.map((err) => ({
-                field: err.path.join("."),
+                field: err.path.join('.'),
                 message: err.message,
             }));
             res.status(400).json({
                 success: false,
-                message: "Validation failed",
+                message: 'Validation failed',
                 errors,
             });
             return;
         }
-        passport_1.default.authenticate("local", { session: false }, (err, user, info) => {
+        passport_1.default.authenticate('local', { session: false }, (err, user, info) => {
             if (err) {
                 return next(err);
             }
             if (!user) {
                 return res.status(401).json({
                     success: false,
-                    message: info?.message || "Invalid credentials",
+                    message: info?.message || 'Invalid credentials',
                 });
             }
             // Generate JWT token
-            const token = (0, jwt_config_1.generateToken)(user, "local");
+            const token = (0, jwt_config_1.generateToken)(user, 'local');
             res.status(200).json({
-                message: "Login successful",
+                message: 'Login successful',
                 user: {
                     id: user._id,
                     email: user.email,
-                    userType: "local",
+                    userType: 'local',
                     firstName: user.firstName,
                     lastName: user.lastName,
-                    token: token
+                    token: token,
                 },
             });
         })(req, res, next);
     }
     catch (error) {
-        console.error("Login error:", error);
+        console.error('Login error:', error);
         res.status(500).json({
             success: false,
-            message: "An error occurred during login",
+            message: 'An error occurred during login',
         });
     }
 };
@@ -123,31 +123,31 @@ const adminLogin = (req, res, next) => {
         const validation = (0, validations_1.validateInput)(validations_1.loginSchema, req.body);
         if (!validation.success) {
             const errors = validation.error.errors.map((err) => ({
-                field: err.path.join("."),
+                field: err.path.join('.'),
                 message: err.message,
             }));
             res.status(400).json({
                 success: false,
-                message: "Validation failed",
+                message: 'Validation failed',
                 errors,
             });
             return;
         }
-        passport_1.default.authenticate("admin", { session: false }, (err, admin, info) => {
+        passport_1.default.authenticate('admin', { session: false }, (err, admin, info) => {
             if (err) {
                 return next(err);
             }
             if (!admin) {
                 return res.status(401).json({
                     success: false,
-                    message: info?.message || "Invalid admin credentials",
+                    message: info?.message || 'Invalid admin credentials',
                 });
             }
             // Generate JWT token
-            const token = (0, jwt_config_1.generateToken)(admin, "admin");
+            const token = (0, jwt_config_1.generateToken)(admin, 'admin');
             res.status(200).json({
                 success: true,
-                message: "Admin login successful",
+                message: 'Admin login successful',
                 user: {
                     id: admin._id,
                     email: admin.email,
@@ -155,16 +155,16 @@ const adminLogin = (req, res, next) => {
                     firstName: admin.firstName,
                     lastName: admin.lastName,
                     token: token,
-                    userType: "admin",
+                    userType: 'admin',
                 },
             });
         })(req, res, next);
     }
     catch (error) {
-        console.error("Admin login error:", error);
+        console.error('Admin login error:', error);
         res.status(500).json({
             success: false,
-            message: "An error occurred during admin login",
+            message: 'An error occurred during admin login',
         });
     }
 };
@@ -181,12 +181,12 @@ const createAdmin = async (req, res) => {
         }), req.body);
         if (!validation.success) {
             const errors = validation.error.errors.map((err) => ({
-                field: err.path.join("."),
+                field: err.path.join('.'),
                 message: err.message,
             }));
             res.status(400).json({
                 success: false,
-                message: "Validation failed",
+                message: 'Validation failed',
                 errors,
             });
             return;
@@ -197,7 +197,7 @@ const createAdmin = async (req, res) => {
         if (emailExists) {
             res.status(400).json({
                 success: false,
-                message: "Email already in use",
+                message: 'Email already in use',
             });
             return;
         }
@@ -205,18 +205,18 @@ const createAdmin = async (req, res) => {
         const admin = await admin_model_1.Admin.create({
             email,
             password,
-            role: role || "admin",
+            role: role || 'admin',
         });
         res.status(201).json({
             success: true,
-            message: "Admin user created successfully",
+            message: 'Admin user created successfully',
         });
     }
     catch (error) {
-        console.error("Create admin error:", error);
+        console.error('Create admin error:', error);
         res.status(500).json({
             success: false,
-            message: "An error occurred while creating admin user",
+            message: 'An error occurred while creating admin user',
         });
     }
 };
@@ -224,25 +224,28 @@ exports.createAdmin = createAdmin;
 /**
  * Initiate Google OAuth authentication
  */
-exports.googleAuth = passport_1.default.authenticate("google", {
-    scope: ["profile", "email"],
+exports.googleAuth = passport_1.default.authenticate('google', {
+    scope: ['profile', 'email'],
 });
 /**
  * Handle Google OAuth callback and issue JWT
  */
 const googleCallback = (req, res, next) => {
-    passport_1.default.authenticate("google", { session: false }, (err, user, info) => {
+    passport_1.default.authenticate('google', { session: false }, (err, user, info) => {
+        console.log('🚀 ~ passport.authenticate ~ info:', info);
+        console.log('🚀 ~ passport.authenticate ~ user:', user);
         if (err) {
-            console.error("Authentication error:", err);
-            return res.redirect("/auth/login?error=authentication_failed");
+            console.error('Authentication error:', err);
+            return res.redirect('/auth/login?error=authentication_failed');
         }
         if (!user) {
-            return res.redirect(`/auth/login?error=login_failed&message=${encodeURIComponent(info?.message || "")}`);
+            return res.redirect(`/auth/login?error=login_failed&message=${encodeURIComponent(info?.message || '')}`);
         }
         // Generate JWT token
-        const token = (0, jwt_config_1.generateToken)(user, "google");
+        const token = (0, jwt_config_1.generateToken)(user, 'google');
         // Redirect to frontend with token
-        const clientRedirectUrl = process.env.CLIENT_URL || "http://localhost:3000";
+        const clientRedirectUrl = process.env.CLIENT_URL || 'http://localhost:3000';
+        console.log('🚀 ~ passport.authenticate ~ clientRedirectUrl:', clientRedirectUrl);
         res.redirect(`${clientRedirectUrl}/auth/callback?token=${token}&userType=google`);
     })(req, res, next);
 };
@@ -259,7 +262,7 @@ const verifyToken = (req, res) => {
             email: user.email,
             displayName: user.displayName,
             userType: user.userType,
-            ...(user.userType === "admin" ? { role: user.role } : {}),
+            ...(user.userType === 'admin' ? { role: user.role } : {}),
         },
     });
 };
@@ -269,7 +272,7 @@ exports.verifyToken = verifyToken;
  */
 const logout = (req, res) => {
     req.logout(() => {
-        res.status(200).json({ message: "Logged out successfully" });
+        res.status(200).json({ message: 'Logged out successfully' });
     });
 };
 exports.logout = logout;

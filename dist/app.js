@@ -16,6 +16,7 @@ const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+console.log('🚀 ~ SESSION_SECRET:', constant_1.SESSION_SECRET);
 // Session configuration
 app.use((0, express_session_1.default)({
     secret: constant_1.SESSION_SECRET,
@@ -36,3 +37,4 @@ app.use('/api/auth', auth_routes_1.authRoute);
 app.listen(constant_1.PORT, () => {
     console.log(`App is running on port ${constant_1.PORT}`);
 });
+exports.default = app;
