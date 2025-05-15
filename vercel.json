@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "quiz-api",
   "builds": [{ "source": "dist/app.js", "use": "@vercel/node" }],
   "routes": [{ "source": "/(.*)", "destination": "dist/app.js" }],
   "rewrites": [{ "source": "/(.*)", "destination": "/dist" }]
