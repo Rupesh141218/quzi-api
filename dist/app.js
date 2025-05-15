@@ -16,6 +16,9 @@ const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
+console.log('🚀 ~ JWT_SECRET:', constant_1.JWT_SECRET);
+console.log('🚀 ~ GOOGLE_CLIENT_SECRET:', constant_1.GOOGLE_CLIENT_SECRET);
+console.log('🚀 ~ GOOGLE_CLIENT_ID:', constant_1.GOOGLE_CLIENT_ID);
 console.log('🚀 ~ SESSION_SECRET:', constant_1.SESSION_SECRET);
 // Session configuration
 app.use((0, express_session_1.default)({

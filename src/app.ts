@@ -1,4 +1,11 @@
-import { SESSION_SECRET, PORT } from './config/constant';
+import {
+  SESSION_SECRET,
+  PORT,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+  JWT_SECRET,
+} from './config/constant';
+
 import express from 'express';
 import cors from 'cors';
 import { dbConnection } from './config/dbConnection';
@@ -14,6 +21,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+console.log('🚀 ~ JWT_SECRET:', JWT_SECRET);
+console.log('🚀 ~ GOOGLE_CLIENT_SECRET:', GOOGLE_CLIENT_SECRET);
+console.log('🚀 ~ GOOGLE_CLIENT_ID:', GOOGLE_CLIENT_ID);
 console.log('🚀 ~ SESSION_SECRET:', SESSION_SECRET);
 
 // Session configuration
