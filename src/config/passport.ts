@@ -102,7 +102,8 @@ export const configurePassport = () => {
       {
         clientID: GOOGLE_CLIENT_ID as string,
         clientSecret: GOOGLE_CLIENT_SECRET as string,
-        callbackURL: '/api/auth/google/callback',
+        callbackURL:
+          'https://quiz-app-l46p06dah-nabraj-chaudharys-projects.vercel.app/api/auth/google/callback',
         scope: ['profile', 'email'],
       },
       async (accessToken, refreshToken, profile, done) => {
