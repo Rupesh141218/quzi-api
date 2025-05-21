@@ -81,7 +81,7 @@ const configurePassport = () => {
     passport_1.default.use(new passport_google_oauth20_1.Strategy({
         clientID: constant_1.GOOGLE_CLIENT_ID,
         clientSecret: constant_1.GOOGLE_CLIENT_SECRET,
-        callbackURL: '/api/auth/google/callback',
+        callbackURL: 'https://quiz-app-l46p06dah-nabraj-chaudharys-projects.vercel.app/api/auth/google/callback',
         scope: ['profile', 'email'],
     }, async (accessToken, refreshToken, profile, done) => {
         try {
